@@ -3,8 +3,16 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var flash = require('connect-flash');
+var session = require('express-session')
 
-var categoryRouter = require('./app/category/router.js');
+const dashboardRouter = require('./app/dashboard/router.js');
+const categoryRouter = require('./app/category/router.js');
+const nominalRouter = require('./app/nominal/router.js');
+const voucherRouter = require('./app/voucher/router.js');
+const bankRouter = require('./app/bank/router.js');
+const paymentRouter = require('./app/payment/router.js');
+const methodOverride = require('method-override')
 
 var app = express();
 
@@ -12,13 +20,27 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+app.use(flash());
+app.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { }
+}))
+app.use(methodOverride('_method'))
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/adminlte', express.static(path.join(__dirname, './node_modules/admin-lte/')))
 
-app.use('/', categoryRouter);
+app.use('/', dashboardRouter);
+app.use('/category', categoryRouter);
+app.use('/nominal', nominalRouter);
+app.use('/voucher', voucherRouter);
+app.use('/bank', bankRouter);
+app.use('/payment', paymentRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
