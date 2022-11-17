@@ -6,6 +6,7 @@ var logger = require('morgan');
 var flash = require('connect-flash');
 var session = require('express-session')
 
+const userRouter = require('./app/user/router.js');
 const dashboardRouter = require('./app/dashboard/router.js');
 const categoryRouter = require('./app/category/router.js');
 const nominalRouter = require('./app/nominal/router.js');
@@ -35,7 +36,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/adminlte', express.static(path.join(__dirname, './node_modules/admin-lte/')))
 
-app.use('/', dashboardRouter);
+app.use('/', userRouter);
+app.use('/dashboard', dashboardRouter);
 app.use('/category', categoryRouter);
 app.use('/nominal', nominalRouter);
 app.use('/voucher', voucherRouter);

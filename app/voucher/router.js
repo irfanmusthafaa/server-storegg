@@ -4,6 +4,9 @@ const { voucher, viewCreate, createVoucher, viewEdit, editVoucher, deleteVoucher
 const multer = require('multer')
 const os = require('os')
 
+const { isLoginAdmin } = require('../middleware/auth')
+
+router.use(isLoginAdmin)
 router.get('/', voucher)
 router.get('/create', viewCreate)
 router.post('/create', multer({ dest: os.tmpdir() }).single('image'), createVoucher);
