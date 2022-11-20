@@ -5,7 +5,7 @@ const bankSchema = new mongoose.Schema({
         type: String,
         required: [true, 'nama harus diisi']
     },
-    nameBank:{
+    bankName:{
         type: String,
         required: [true, 'nama bank harus diisi']
     },

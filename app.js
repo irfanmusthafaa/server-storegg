@@ -13,6 +13,7 @@ const nominalRouter = require('./app/nominal/router.js');
 const voucherRouter = require('./app/voucher/router.js');
 const bankRouter = require('./app/bank/router.js');
 const paymentRouter = require('./app/payment/router.js');
+const transactionRouter = require('./app/transaction/router.js');
 const methodOverride = require('method-override')
 
 var app = express();
@@ -43,6 +44,7 @@ app.use('/nominal', nominalRouter);
 app.use('/voucher', voucherRouter);
 app.use('/bank', bankRouter);
 app.use('/payment', paymentRouter);
+app.use('/transaction', transactionRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
