@@ -1,7 +1,11 @@
 {
   "name": "server-storegg",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "private": true,
+  "engines": {
+    "node": "16.16.0",
+    "npm": "8.16.0"
+  },
   "scripts": {
     "start": "node ./bin/www",
     "dev": "env-cmd -f ./.env.local nodemon .bin/www",
