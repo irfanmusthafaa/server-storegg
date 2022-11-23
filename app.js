@@ -5,7 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var flash = require('connect-flash');
 var session = require('express-session')
-var cors = require('cors')
+const cors = require('cors')
 
 const userRouter = require('./app/user/router.js');
 const dashboardRouter = require('./app/dashboard/router.js');
@@ -18,13 +18,11 @@ const transactionRouter = require('./app/transaction/router.js');
 
 const playerRouter = require('./app/player/router.js');
 const authRouter = require('./app/auth/router.js');
-
-const URL = '/api/v1'
-app.use(cors())
-
 const methodOverride = require('method-override')
 
 var app = express();
+const URL = '/api/v1'
+app.use(cors());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
