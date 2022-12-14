@@ -86,7 +86,7 @@ module.exports = {
 
             const tax = (10 / 100) * res_nominal._doc.price;
 
-            const value =  res_nominal._doc.price - tax;
+            const value =  res_nominal._doc.price + tax;
 
             const payload = {
                 historyVoucherTopup:{
@@ -301,10 +301,10 @@ module.exports = {
             
         } catch (err) {
             if(err && err.name === "ValidationError"){
-                re.status(422).json({
+                res.status(422).json({
                     error: 1,
                     message: err.message,
-                    field: err.errors
+                    fields: err.errors
                 })
             }
         }
